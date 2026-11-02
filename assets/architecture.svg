@@ -1,0 +1,87 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1000" viewBox="0 0 1200 1000" role="img" aria-labelledby="title desc">
+  <title id="title">Codex Productivity 工具体系架构</title>
+  <desc id="desc">公共工具层包含六个应用和两个共享组件。主要工作流从 codex.project 到 codex.task，再由 codex.helper 启动 Codex。migrate、session 和 tool 提供独立能力。全部应用依赖 config，project、task、tool、session 依赖 appserver。配置、账号、任务与上下文保存在私有使用层；原生 Codex 和项目源码属于外部运行环境。</desc>
+  <defs>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; fill: #182b49; }
+      .title { font-size: 32px; font-weight: 700; }
+      .subtitle { font-size: 18px; fill: #52617b; }
+      .section { font-size: 21px; font-weight: 700; }
+      .name { font-size: 24px; font-weight: 650; }
+      .body { font-size: 18px; }
+      .note { font-size: 16px; fill: #52617b; }
+      .mono { font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#446dad"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="1000" rx="20" fill="#ffffff"/>
+  <text x="28" y="48" class="title">Codex Productivity</text>
+  <text x="28" y="80" class="subtitle">六个应用 · 两个共享组件 · 工具代码与私有使用信息分层</text>
+
+  <rect x="24" y="108" width="1152" height="520" rx="18" fill="#f4f7fd" stroke="#cedcf0"/>
+  <text x="48" y="145" class="section">01 公共工具层</text>
+  <text x="244" y="145" class="note">通用实现、接口、合成示例与文档</text>
+
+  <rect x="48" y="172" width="334" height="112" rx="12" fill="#e8f0ff" stroke="#a7c0e9"/>
+  <text x="68" y="209" class="name">codex.project</text>
+  <text x="68" y="239" class="body">项目选择与上下文</text>
+  <text x="68" y="265" class="note">统一项目入口，委托任务操作</text>
+
+  <rect x="433" y="172" width="334" height="112" rx="12" fill="#e8f0ff" stroke="#a7c0e9"/>
+  <text x="453" y="209" class="name">codex.task</text>
+  <text x="453" y="239" class="body">需求 → 执行 → 恢复 → 交付</text>
+  <text x="453" y="265" class="note">可直接用于任意本地工作目录</text>
+
+  <rect x="818" y="172" width="334" height="112" rx="12" fill="#e8f0ff" stroke="#a7c0e9"/>
+  <text x="838" y="209" class="name">codex.helper</text>
+  <text x="838" y="239" class="body">启动与恢复 Codex CLI</text>
+  <text x="838" y="265" class="note">参数、模型别名与代理环境</text>
+  <path d="M 389 226 L 423 226" fill="none" stroke="#446dad" stroke-width="2.5" marker-end="url(#arrow)"/>
+  <path d="M 774 226 L 808 226" fill="none" stroke="#446dad" stroke-width="2.5" marker-end="url(#arrow)"/>
+
+  <rect x="48" y="312" width="334" height="108" rx="12" fill="#ffffff" stroke="#d3dce9"/>
+  <text x="68" y="348" class="name">codex.migrate</text>
+  <text x="68" y="377" class="body">会话发现与目录迁移</text>
+  <text x="68" y="403" class="note">索引更新、备份与恢复</text>
+
+  <rect x="433" y="312" width="334" height="108" rx="12" fill="#ffffff" stroke="#d3dce9"/>
+  <text x="453" y="348" class="name">codex.session</text>
+  <text x="453" y="377" class="body">会话标题维护</text>
+  <text x="453" y="403" class="note">人工命名保护与历史审阅</text>
+
+  <rect x="818" y="312" width="334" height="108" rx="12" fill="#ffffff" stroke="#d3dce9"/>
+  <text x="838" y="348" class="name">codex.tool</text>
+  <text x="838" y="377" class="body">本地账号、额度与用量</text>
+  <text x="838" y="403" class="note">账号切换、查询、采集与缓存</text>
+
+  <text x="48" y="458" class="note">共享组件 · 库依赖与应用之间的命令调用分别维护</text>
+  <rect x="48" y="478" width="540" height="124" rx="12" fill="#e9f6f2" stroke="#afd2c8"/>
+  <text x="68" y="515" class="name">codex.config</text>
+  <text x="68" y="545" class="body">配置校验、默认值、别名与运行数据路径</text>
+  <text x="68" y="578" class="note">全部六个应用使用 · 另有路径查询命令</text>
+
+  <rect x="612" y="478" width="540" height="124" rx="12" fill="#e9f6f2" stroke="#afd2c8"/>
+  <text x="632" y="515" class="name">codex.appserver</text>
+  <text x="632" y="545" class="body">Codex App Server 连接与协议</text>
+  <text x="632" y="578" class="note">project / task / tool / session 使用</text>
+
+  <rect x="24" y="650" width="1152" height="176" rx="18" fill="#fff8eb" stroke="#e4cfaa"/>
+  <text x="48" y="689" class="section">02 私有使用层</text>
+  <text x="244" y="689" class="body mono">~/.config/codex-productivity/</text>
+  <text x="48" y="730" class="section">配置文件</text>
+  <text x="48" y="762" class="body mono">common.toml · codex.&lt;tool&gt;.toml</text>
+  <text x="48" y="796" class="note">个人路径、工具偏好、项目设置与代理</text>
+  <path d="M 600 714 L 600 804" stroke="#e4cfaa"/>
+  <text x="628" y="730" class="section">runtime/ 运行文件</text>
+  <text x="628" y="762" class="body">账号与工具状态、任务与媒体、上下文与证据</text>
+  <text x="628" y="796" class="note">按工具、工作区或 Codex 数据目录隔离</text>
+
+  <rect x="24" y="848" width="1152" height="124" rx="18" fill="#f6f7f9" stroke="#d7dce3"/>
+  <text x="48" y="886" class="section">外部运行环境</text>
+  <text x="48" y="925" class="body">Codex CLI / App Server</text>
+  <text x="459" y="925" class="body">Codex 原生数据</text>
+  <text x="865" y="925" class="body">项目源码</text>
+  <text x="48" y="953" class="note">分别保有原存储与生命周期；调整工具的运行数据目录不会自动迁移这些内容</text>
+</svg>
