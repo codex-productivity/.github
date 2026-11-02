@@ -21,34 +21,11 @@ Codex Productivity 将围绕 Codex CLI 的日常操作拆成可组合的工具�
 
 ## 应用之间怎样协作
 
-下图中的实线表示命令调用；虚线表示通信库调用。CLI 是命令行接口，JSON 是程序间交换结构化结果的格式。
+上半图展示命令调用与文件访问，下半图展示通信库的使用关系。CLI 是命令行接口，JSON 是程序间交换结构化结果的格式。
 
-```mermaid
-flowchart TB
-    project["codex.project<br/>项目与上下文"]
-    task["codex.task<br/>需求与任务生命周期"]
-    helper["codex.helper<br/>Codex 启动器"]
-    migrate["codex.migrate<br/>会话发现与目录迁移"]
-    session["codex.session<br/>会话标题"]
-    tool["codex.tool<br/>账号与用量"]
-    appserver["codex.appserver<br/>通信库"]
-    cli["Codex CLI"]
-    server["Codex App Server"]
-    files["Codex 本地会话文件与索引"]
+![工具调用关系：project 委托 task，二者调用 helper 与 migrate；helper 启动 Codex CLI，migrate 更新会话文件与索引；project、task、session、tool 使用 appserver 库连接 Codex App Server。](../assets/calls.svg)
 
-    project -->|委托 CLI / JSON| task
-    project -->|直接启动| helper
-    task -->|启动 / 恢复| helper
-    project -->|归档时迁移| migrate
-    task -->|会话发现 / 迁移| migrate
-    helper --> cli
-    migrate --> files
-    project -.-> appserver
-    task -.-> appserver
-    session -.-> appserver
-    tool -.-> appserver
-    appserver -.-> server
-```
+图形源文件：[SVG](../assets/calls.svg) · [Mermaid](../assets/calls.mmd)。两种源文件表达相同的调用关系；页面直接显示 SVG。
 
 配置读取关系另见下一节。图中展示主要调用边界；`codex.tool` 的部分账号与用量操作还会访问对应的远端服务。
 

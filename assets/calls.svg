@@ -1,0 +1,84 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1200" height="1040" viewBox="0 0 1200 1040" role="img" aria-labelledby="title desc">
+  <title id="title">Codex Productivity 工具调用关系</title>
+  <desc id="desc">命令调用：project 调用 task、helper、migrate，task 调用 helper、migrate，helper 调用 Codex CLI，migrate 读写本地会话文件与索引。通信库调用：project、task、session、tool 依赖 appserver，appserver 连接 Codex App Server。config 依赖另见架构文档的表格。</desc>
+  <defs>
+    <style>
+      text { font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif; fill: #182b49; }
+      .title { font-size: 30px; font-weight: 700; }
+      .section { font-size: 22px; font-weight: 700; }
+      .name { font-size: 24px; font-weight: 650; }
+      .body { font-size: 18px; }
+      .label { font-size: 17px; fill: #52617b; }
+      .command { fill: none; stroke: #446dad; stroke-width: 2.5; marker-end: url(#arrow); }
+      .library { fill: none; stroke: #2c7d68; stroke-width: 2.5; stroke-dasharray: 7 5; }
+    </style>
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#446dad"/>
+    </marker>
+    <marker id="library-arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto">
+      <path d="M 0 0 L 10 5 L 0 10 z" fill="#2c7d68"/>
+    </marker>
+  </defs>
+  <rect width="1200" height="1040" rx="20" fill="#ffffff"/>
+  <text x="28" y="48" class="title">工具怎样协作</text>
+  <text x="28" y="80" class="label">命令调用与共享库依赖分别呈现；同名节点表示同一个工具</text>
+
+  <rect x="24" y="108" width="1152" height="532" rx="18" fill="#f4f7fd" stroke="#cedcf0"/>
+  <text x="48" y="146" class="section">01 命令调用与文件访问</text>
+  <path d="M 178 216 V 184 H 994 V 206" class="command"/>
+  <rect x="526" y="170" width="120" height="27" fill="#f4f7fd"/>
+  <text x="586" y="190" text-anchor="middle" class="label">直接启动</text>
+
+  <rect x="48" y="216" width="260" height="94" rx="12" fill="#e8f0ff" stroke="#a7c0e9"/>
+  <text x="68" y="254" class="name">codex.project</text>
+  <text x="68" y="283" class="body">项目与上下文</text>
+  <rect x="456" y="216" width="260" height="94" rx="12" fill="#e8f0ff" stroke="#a7c0e9"/>
+  <text x="476" y="254" class="name">codex.task</text>
+  <text x="476" y="283" class="body">任务生命周期</text>
+  <rect x="864" y="216" width="288" height="94" rx="12" fill="#e8f0ff" stroke="#a7c0e9"/>
+  <text x="884" y="254" class="name">codex.helper</text>
+  <text x="884" y="283" class="body">启动器</text>
+  <path d="M 318 270 H 446" class="command"/>
+  <text x="382" y="250" text-anchor="middle" class="label">CLI / JSON</text>
+  <path d="M 726 270 H 854" class="command"/>
+  <text x="790" y="250" text-anchor="middle" class="label">启动 / 恢复</text>
+
+  <rect x="456" y="384" width="260" height="94" rx="12" fill="#ffffff" stroke="#bdcce1"/>
+  <text x="476" y="422" class="name">codex.migrate</text>
+  <text x="476" y="451" class="body">会话发现与目录迁移</text>
+  <path d="M 178 320 V 431 H 446" class="command"/>
+  <text x="312" y="411" text-anchor="middle" class="label">归档时迁移</text>
+  <path d="M 586 320 V 374" class="command"/>
+  <text x="603" y="353" class="label">发现 / 迁移</text>
+
+  <rect x="864" y="384" width="288" height="94" rx="12" fill="#f6f7f9" stroke="#c6cdd7"/>
+  <text x="884" y="422" class="name">Codex CLI</text>
+  <text x="884" y="451" class="body">原生 Codex 执行环境</text>
+  <path d="M 1008 320 V 374" class="command"/>
+
+  <rect x="416" y="540" width="340" height="70" rx="12" fill="#f6f7f9" stroke="#c6cdd7"/>
+  <text x="586" y="582" text-anchor="middle" class="body">Codex 本地会话文件与索引</text>
+  <path d="M 586 488 V 530" class="command"/>
+  <text x="603" y="518" class="label">文件读写</text>
+
+  <rect x="24" y="664" width="1152" height="348" rx="18" fill="#f0f8f5" stroke="#bcdacf"/>
+  <text x="48" y="702" class="section">02 App Server 通信</text>
+  <rect x="48" y="730" width="240" height="64" rx="12" fill="#ffffff" stroke="#afd2c8"/>
+  <text x="168" y="770" text-anchor="middle" class="name">codex.project</text>
+  <rect x="336" y="730" width="240" height="64" rx="12" fill="#ffffff" stroke="#afd2c8"/>
+  <text x="456" y="770" text-anchor="middle" class="name">codex.task</text>
+  <rect x="624" y="730" width="240" height="64" rx="12" fill="#ffffff" stroke="#afd2c8"/>
+  <text x="744" y="770" text-anchor="middle" class="name">codex.session</text>
+  <rect x="912" y="730" width="240" height="64" rx="12" fill="#ffffff" stroke="#afd2c8"/>
+  <text x="1032" y="770" text-anchor="middle" class="name">codex.tool</text>
+
+  <path d="M 168 804 V 836 H 1032 V 804 M 456 804 V 836 M 744 804 V 836" class="library"/>
+  <path d="M 586 836 V 874" class="library" marker-end="url(#library-arrow)"/>
+  <text x="603" y="864" class="label">调用通信库</text>
+  <rect x="416" y="884" width="340" height="76" rx="12" fill="#e1f2eb" stroke="#9cc6b8"/>
+  <text x="586" y="929" text-anchor="middle" class="name">codex.appserver</text>
+  <rect x="864" y="884" width="288" height="76" rx="12" fill="#f6f7f9" stroke="#c6cdd7"/>
+  <text x="1008" y="929" text-anchor="middle" class="name">Codex App Server</text>
+  <path d="M 766 922 H 854" class="library" marker-end="url(#library-arrow)"/>
+  <text x="48" y="990" class="label">配置关系见文档：全部六个应用使用 codex.config；helper 与 migrate 不导入 appserver 库</text>
+</svg>

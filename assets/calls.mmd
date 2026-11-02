@@ -1,0 +1,24 @@
+flowchart TB
+    project["codex.project<br/>项目与上下文"]
+    task["codex.task<br/>需求与任务生命周期"]
+    helper["codex.helper<br/>Codex 启动器"]
+    migrate["codex.migrate<br/>会话发现与目录迁移"]
+    session["codex.session<br/>会话标题"]
+    tool["codex.tool<br/>账号与用量"]
+    appserver["codex.appserver<br/>通信库"]
+    cli["Codex CLI"]
+    server["Codex App Server"]
+    files["Codex 本地会话文件与索引"]
+
+    project -->|委托 CLI / JSON| task
+    project -->|直接启动| helper
+    task -->|启动 / 恢复| helper
+    project -->|归档时迁移| migrate
+    task -->|会话发现 / 迁移| migrate
+    helper --> cli
+    migrate -->|文件读写| files
+    project -.-> appserver
+    task -.-> appserver
+    session -.-> appserver
+    tool -.-> appserver
+    appserver -.-> server
